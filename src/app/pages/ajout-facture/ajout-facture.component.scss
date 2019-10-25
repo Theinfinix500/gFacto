@@ -1,0 +1,25 @@
+.facture-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fournisseur, .date-facture, .date-commande {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: inline-block;
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 400;
+    border-bottom: 4px blue solid;
+}
+
+// .facture-form label {
+    
+// }
+
+.ligne-facture {
+    margin-top: 2em;
+}

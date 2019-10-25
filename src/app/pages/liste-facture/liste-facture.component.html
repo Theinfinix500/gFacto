@@ -1,0 +1,25 @@
+<div class="header">
+    <h1>Factures:</h1>
+    <p-button label="Ajouter" (click)="redirectTo('ajout-facture')"></p-button>
+</div>
+
+<p-table [value]="factures">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Fournisseur</th>
+            <th>Date Facture</th>
+            <th>Date Commande</th>
+            <th>Total Facture</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-facture>
+        <tr>
+            <td>{{facture.id + 1}}</td>
+            <td>{{facture.fournisseur }}</td>
+            <td>{{facture.dateFacture | date:'short'}}</td>
+            <td>{{facture.dateCommande | date:'short'}}</td>
+            <td>{{facture.ttc}}</td>
+        </tr>
+    </ng-template>
+</p-table>

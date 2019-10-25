@@ -1,0 +1,116 @@
+
+    <h1 class="header">Nouvelle facture:</h1>
+
+
+<div class="facture-form">
+    <div class="fournisseur">
+        <label for="float-input">Fournisseur</label>
+        <input id="float-input" type="text" size="30" pInputText [(ngModel)]="fournisseur">
+    </div>
+
+    <div class="date-facture">
+        <label>Date facture</label>
+        <p-calendar [(ngModel)]="dateFacture" [showIcon]="true"></p-calendar>
+    </div>
+
+    <div class="date-commande">
+        <label>Date commande</label>
+        <p-calendar [(ngModel)]="dateCommande" [showIcon]="true"></p-calendar>
+    </div>
+</div>
+
+<!-- <div class="ligne-facture-form">
+    <span class="ui-float-label">
+        <input id="float-input" type="text" size="30" pInputText [(ngModel)]="libelle"> 
+        <label for="float-input">Libelle</label>
+    </span>
+    <span class="ui-float-label">
+        <input id="float-input" type="number" size="30" pInputText [(ngModel)]="qte"> 
+        <label for="float-input">Quantite</label>
+    </span>
+    <span class="ui-float-label">
+        <input id="float-input" type="number" size="30" pInputText [(ngModel)]="puht"> 
+        <label for="float-input">Prix unitaire HT</label>
+    </span>
+    <span class="ui-float-label">
+        <input id="float-input" type="number" size="30" pInputText [(ngModel)]="tva"> 
+        <label for="float-input">TVA</label>
+    </span>
+</div> -->
+
+<div class="ligne-facture">
+    <p-table #dataTable [value]="lignesFacture" dataKey="id" editMode="row">
+        <ng-template pTemplate="caption">
+            <input type="text" pInputText [(ngModel)]="libelle">
+            <input type="number" pInputText [(ngModel)]="qte">
+            <input type="number" pInputText [(ngModel)]="puht">
+            <input type="number" pInputText [(ngModel)]="tva">
+            <button pButton icon="pi pi-plus" type="button" (click)="ajouterLigneFacture()"></button>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Libelle</th>
+                <th>Quantite</th>
+                <th>Prix unitaire HT</th>
+                <th>TVA</th>
+                <th>TTC</th>
+                <th style="width:8em"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ligneFacture let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="ligneFacture">
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="ligneFacture.libelle" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ligneFacture.libelle}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="number" [(ngModel)]="ligneFacture.qte" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ligneFacture.qte}}
+                        </ng-template>
+                    </p-cellEditor>
+
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="number" [(ngModel)]="ligneFacture.puht" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ligneFacture.puht}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="number" [(ngModel)]="ligneFacture.tva" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ligneFacture.tva}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>{{ligneFacture.ttc}}</td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                        class="ui-button-info" (click)="onRowEditInit(rowData)"></button>
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                        class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                        class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <button type="button" (click)="onAdd(dataTable)">yo</button>
+</div>
